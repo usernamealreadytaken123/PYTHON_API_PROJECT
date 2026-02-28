@@ -1,0 +1,65 @@
+### This file is for PyCharm HTTP Client.
+### GET requests can also be opened in a browser.
+### POST requests should be executed from this file (Run) or via /docs.
+
+###
+
+### Root (GET) - can be opened in browser:
+### http://127.0.0.1:8000/
+GET http://127.0.0.1:8000/
+Accept: application/json
+
+###
+
+### 1) Current weather by coordinates (GET) - can be opened in browser:
+### http://127.0.0.1:8000/weather/current?lat=55.7558&lon=37.6173
+GET http://127.0.0.1:8000/weather/current?lat=55.7558&lon=37.6173
+Accept: application/json
+
+###
+
+### 2) Add city and cache today's forecast (POST)
+### This request cannot be opened directly in browser address bar.
+### Run it from PyCharm HTTP Client or use: http://127.0.0.1:8000/docs
+POST http://127.0.0.1:8000/cities
+Content-Type: application/json
+
+{
+  "name": "Moscow",
+  "latitude": 55.7558,
+  "longitude": 37.6173
+}
+
+###
+
+### 2) Add another city (POST)
+### Run it from PyCharm HTTP Client or use: http://127.0.0.1:8000/docs
+POST http://127.0.0.1:8000/cities
+Content-Type: application/json
+
+{
+  "name": "Seoul",
+  "latitude": 37.5665,
+  "longitude": 126.9780
+}
+
+###
+
+### 3) Get cities with available forecast (GET) - can be opened in browser:
+### http://127.0.0.1:8000/cities
+GET http://127.0.0.1:8000/cities
+Accept: application/json
+
+###
+
+### 4) Get weather for city at selected time (GET) - can be opened in browser:
+### http://127.0.0.1:8000/cities/Moscow/weather?time=18:00
+GET http://127.0.0.1:8000/cities/Moscow/weather?time=18:00
+Accept: application/json
+
+###
+
+### 4) Get weather for city at selected time with selected fields (GET) - can be opened in browser:
+### http://127.0.0.1:8000/cities/Moscow/weather?time=18:00&fields=temperature,wind_speed
+GET http://127.0.0.1:8000/cities/Moscow/weather?time=18:00&fields=temperature,wind_speed
+Accept: application/json
