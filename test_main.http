@@ -1,27 +1,40 @@
-### This file is for PyCharm HTTP Client.
-### GET requests can also be opened in a browser.
-### POST requests should be executed from this file (Run) or via /docs.
+### Этот файл предназначен для HTTP Client в PyCharm.
+### GET-запросы также можно открывать в браузере.
+### POST-запросы следует выполнять из этого файла (Run) или через /docs.
 
 ###
 
-### Root (GET) - can be opened in browser:
+### Корневой маршрут (GET) — можно открыть в браузере:
 ### http://127.0.0.1:8000/
 GET http://127.0.0.1:8000/
 Accept: application/json
 
 ###
 
-### 1) Current weather by coordinates (GET) - can be opened in browser:
+### 1) Регистрация пользователя (POST)
+### Этот запрос нельзя открыть напрямую через адресную строку браузера.
+### Выполняйте его из HTTP Client в PyCharm или через: http://127.0.0.1:8000/docs
+POST http://127.0.0.1:8000/users
+Content-Type: application/json
+
+{
+  "name": "Artem"
+}
+
+###
+
+### 2) Получение текущей погоды по координатам (GET) — можно открыть в браузере:
 ### http://127.0.0.1:8000/weather/current?lat=55.7558&lon=37.6173
 GET http://127.0.0.1:8000/weather/current?lat=55.7558&lon=37.6173
 Accept: application/json
 
 ###
 
-### 2) Add city and cache today's forecast (POST)
-### This request cannot be opened directly in browser address bar.
-### Run it from PyCharm HTTP Client or use: http://127.0.0.1:8000/docs
-POST http://127.0.0.1:8000/cities
+### 3) Добавление города пользователю и сохранение прогноза на текущий день (POST)
+### Этот запрос нельзя открыть напрямую через адресную строку браузера.
+### Перед вызовом замените user_id на реальный ID, полученный после регистрации пользователя.
+### Выполняйте его из HTTP Client в PyCharm или через: http://127.0.0.1:8000/docs
+POST http://127.0.0.1:8000/cities?user_id=1
 Content-Type: application/json
 
 {
@@ -32,9 +45,10 @@ Content-Type: application/json
 
 ###
 
-### 2) Add another city (POST)
-### Run it from PyCharm HTTP Client or use: http://127.0.0.1:8000/docs
-POST http://127.0.0.1:8000/cities
+### 4) Добавление ещё одного города тому же пользователю (POST)
+### Перед вызовом замените user_id на реальный ID, полученный после регистрации пользователя.
+### Выполняйте его из HTTP Client в PyCharm или через: http://127.0.0.1:8000/docs
+POST http://127.0.0.1:8000/cities?user_id=1
 Content-Type: application/json
 
 {
@@ -45,21 +59,24 @@ Content-Type: application/json
 
 ###
 
-### 3) Get cities with available forecast (GET) - can be opened in browser:
-### http://127.0.0.1:8000/cities
-GET http://127.0.0.1:8000/cities
+### 5) Получение списка городов пользователя (GET) — можно открыть в браузере:
+### Перед вызовом замените user_id на реальный ID, полученный после регистрации пользователя.
+### http://127.0.0.1:8000/cities?user_id=1
+GET http://127.0.0.1:8000/cities?user_id=1
 Accept: application/json
 
 ###
 
-### 4) Get weather for city at selected time (GET) - can be opened in browser:
-### http://127.0.0.1:8000/cities/Moscow/weather?time=18:00
-GET http://127.0.0.1:8000/cities/Moscow/weather?time=18:00
+### 6) Получение погоды для города на указанное время (GET) — можно открыть в браузере:
+### Перед вызовом замените user_id на реальный ID, полученный после регистрации пользователя.
+### http://127.0.0.1:8000/cities/Moscow/weather?user_id=1&time=18:00
+GET http://127.0.0.1:8000/cities/Moscow/weather?user_id=1&time=18:00
 Accept: application/json
 
 ###
 
-### 4) Get weather for city at selected time with selected fields (GET) - can be opened in browser:
-### http://127.0.0.1:8000/cities/Moscow/weather?time=18:00&fields=temperature,wind_speed
-GET http://127.0.0.1:8000/cities/Moscow/weather?time=18:00&fields=temperature,wind_speed
+### 7) Получение погоды для города на указанное время с выбором полей (GET) — можно открыть в браузере:
+### Перед вызовом замените user_id на реальный ID, полученный после регистрации пользователя.
+### http://127.0.0.1:8000/cities/Moscow/weather?user_id=1&time=18:00&fields=temperature,wind_speed
+GET http://127.0.0.1:8000/cities/Moscow/weather?user_id=1&time=18:00&fields=temperature,wind_speed
 Accept: application/json

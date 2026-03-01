@@ -10,10 +10,6 @@ client = TestClient(script.app)
 
 
 def setup_test_storage():
-    """
-    Creates a temporary storage file for each test
-    and redirects script.STORAGE_FILE to it.
-    """
     tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".json")
     tmp.close()
 
@@ -24,7 +20,6 @@ def setup_test_storage():
 
 
 def teardown_test_storage(path: str):
-    """Removes temporary storage file after test."""
     if os.path.exists(path):
         os.remove(path)
 
