@@ -186,6 +186,93 @@ def test_get_city_weather_for_user():
         teardown_test_storage(storage_path)
 
 
+def test_base_api_without_user_id():
+    storage_path = setup_test_storage()
+
+    async def fake_fetch_today_hourly_forecast(lat: float, lon: float):
+        return {
+            "timezone": "Europe/Moscow",
+            "date": "2026-03-01",
+            "hourly": {
+                "2026-03-01T18:00": {
+                    "temperature": -3.4,
+                    "humidity": 82,
+                    "wind_speed": 5.7,
+                    "precipitation": 0.0,
+                }
+            },
+        }
+
+    original = script.fetch_today_hourly_forecast
+    script.fetch_today_hourly_forecast = fake_fetch_today_hourly_forecast
+
+    try:
+        add_response = client.post(
+            "/cities",
+            json={
+                "name": "Moscow",
+                "latitude": 55.7558,
+                "longitude": 37.6173,
+            },
+        )
+        assert add_response.status_code == 200
+
+        cities_response = client.get("/cities")
+        assert cities_response.status_code == 200
+        assert cities_response.json() == [
+            {
+                "name": "Moscow",
+                "latitude": 55.7558,
+                "longitude": 37.6173,
+            }
+        ]
+
+        weather_response = client.get(
+            "/cities/Moscow/weather?time=18:00&fields=temperature,wind_speed"
+        )
+        assert weather_response.status_code == 200
+        assert weather_response.json()["data"] == {
+            "temperature": -3.4,
+            "wind_speed": 5.7,
+        }
+    finally:
+        script.fetch_today_hourly_forecast = original
+        teardown_test_storage(storage_path)
+
+
+def test_add_city_unknown_user_does_not_call_weather_api():
+    storage_path = setup_test_storage()
+    calls = []
+
+    async def fake_fetch_today_hourly_forecast(lat: float, lon: float):
+        calls.append((lat, lon))
+        return {
+            "timezone": "Europe/Moscow",
+            "date": "2026-03-01",
+            "hourly": {},
+        }
+
+    original = script.fetch_today_hourly_forecast
+    script.fetch_today_hourly_forecast = fake_fetch_today_hourly_forecast
+
+    try:
+        response = client.post(
+            "/cities?user_id=999",
+            json={
+                "name": "Moscow",
+                "latitude": 55.7558,
+                "longitude": 37.6173,
+            },
+        )
+
+        assert response.status_code == 404
+        assert response.json()["detail"] == "User not found"
+        assert calls == []
+    finally:
+        script.fetch_today_hourly_forecast = original
+        teardown_test_storage(storage_path)
+
+
 def test_get_current_weather():
     storage_path = setup_test_storage()
 
