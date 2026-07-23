@@ -1,7 +1,8 @@
 # Weather API
 
-HTTP-сервер на FastAPI для получения текущей погоды и прогноза на день через
-Open-Meteo API.
+HTTP-сервер на FastAPI для получения текущей погоды по координатам и хранения
+почасового прогноза на текущий день для отслеживаемых городов через Open-Meteo
+API.
 
 ## Быстрый старт
 
@@ -250,34 +251,5 @@ Invoke-RestMethod `
 `test_api.py` содержит unit-тесты API.
 
 `test_main.http` - необязательный вспомогательный файл с готовыми HTTP-запросами
-для ручной проверки в PyCharm, IntelliJ IDEA или VS Code.
+для ручной проверки в PyCharm или VS Code.
 
-## Что отправлять на проверку
-
-Рекомендуемый набор файлов:
-
-```text
-script.py
-readme.md
-requirements.txt
-test_api.py
-test_main.http
-```
-
-Минимум по условию задания:
-
-```text
-script.py
-readme.md
-```
-
-Не нужно отправлять:
-
-```text
-.venv
-.idea
-__pycache__
-.pytest_cache
-storage.json
-fastApiProject.rar
-```

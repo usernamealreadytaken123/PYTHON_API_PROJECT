@@ -1,3 +1,70 @@
+GET http://127.0.0.1:8000/cities/Tomsk/weather?user_id=1&time=18:00&fields=temperature,humidity,wind_speed,precipitation
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+content-length: 0
+
+<> 2026-07-23T124300.200.json
+
+###
+
+GET http://127.0.0.1:8000/cities
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+content-length: 0
+
+<> 2026-07-23T124250.200.json
+
+###
+
+GET http://127.0.0.1:8000/cities
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+content-length: 0
+
+<> 2026-07-23T124240.200.json
+
+###
+
+POST http://127.0.0.1:8000/cities
+Content-Type: application/json
+Content-Length: 67
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "name": "Paris",
+  "latitude": 48.8566,
+  "longitude": 2.3522
+}
+
+<> 2026-07-23T124234.200.json
+
+###
+
+GET http://127.0.0.1:8000/weather/current?lat=55.7558&lon=37.6173
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+content-length: 0
+
+<> 2026-07-23T124228.200.json
+
+###
+
+GET http://127.0.0.1:8000
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+content-length: 0
+
+<> 2026-07-23T124222.200.json
+
+###
+
 POST http://127.0.0.1:8000/cities
 Content-Type: application/json
 Content-Length: 69
